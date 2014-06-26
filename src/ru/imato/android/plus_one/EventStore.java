@@ -30,11 +30,12 @@ public class EventStore {
 		
 		return event;
 	}
-	
+		
 	private static void loadEvents(){
 		
 		if (events == null){
 			events = Db.getEvents(0, 10, Db.ORDER_DATE);
+			addEvent("View red car");
 		}
 	}
 	
@@ -42,7 +43,7 @@ public class EventStore {
 			Db.saveEvent(events);
 	}
 	
-	public void addEvent(String name){
+	public static void addEvent(String name){
 		Event e = new Event(name, lastId++);
 		events.add(e);
 		saveEvents();
@@ -61,6 +62,7 @@ public class EventStore {
 	}
 	
 	public static ArrayList<Event> getEvents(){
+		loadEvents();
 		return events;
 	}
 	
@@ -69,4 +71,6 @@ public class EventStore {
 		saveEvents();
 		super.finalize();
 	}
+	
+	
 }

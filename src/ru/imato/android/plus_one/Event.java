@@ -48,5 +48,10 @@ public class Event {
 	public void sub(){
 		count--;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 
 }
